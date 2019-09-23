@@ -1,0 +1,88 @@
+ru:
+  date:
+    order: [day, month, year]
+    formats:
+      short_human: '%-e %B'
+      human: '%e %B %Y'
+      input: '%e/%m/%Y'
+      default: '%e %B %Y'
+      one_c: '%Y-%m-%d'
+      dotted: '%d.%m.%Y'
+      day_month: "%d.%m"
+      common_day_names: [воскресенье, понедельник, вторник, среда, четверг, пятница, суббота]
+      standalone_day_names: [Воскресенье, Понедельник, Вторник, Среда, Четверг, Пятница, Суббота]
+      common_abbr_day_names: [Вс, Пн, Вт, Ср, Чт, Пт, Сб]
+      standalone_abbr_day_names: [вс, пн, вт, ср, чт, пт, сб]
+
+      # Названия месяцев -- сокращенные и полные, плюс отдельностоящие.
+      # Не забудьте nil в начале массиве (~)
+      #
+      #
+      # Don't forget the nil at the beginning; there's no such thing as a 0th month
+      common_month_names: [~, января, февраля, марта, апреля, мая, июня, июля, августа, сентября, октября, ноября, декабря]
+      standalone_month_names: [~, Январь, Февраль, Март, Апрель, Май, Июнь, Июль, Август, Сентябрь, Октябрь, Ноябрь, Декабрь]
+      common_abbr_month_names: [~, янв., февр., марта, апр., мая, июня, июля, авг., сент., окт., нояб., дек.]
+      standalone_abbr_month_names: [~, янв., февр., март, апр., май, июнь, июль, авг., сент., окт., нояб., дек.]
+  time:
+    formats:
+      date: "%d.%m.%Y"
+      day_month: "%d.%m"
+      short_time: "%H.%M"
+      short_time_day: "%d.%m %H.%M"
+      time: "%H:%M"
+      time_w_seconds: "%H:%M:%S"
+      default: "%e %B %Y %H:%M"
+      dotted: '%d.%m.%Y'
+      today: 'today at %H:%M'
+      this_year: '%e %B at %H:%M'
+      yesterday: 'yesterday at %H:%M'
+      csv: '%Y-%m-%d %H:%M:%S'
+      file: '%Y-%m-%d-%H-%M-%S'
+      human: '%e %B %Y at %H:%M'
+      rss_pub_date: "%a, %d %b %Y %H:%M:%S %z"
+      short: "%-d.%m.%Y %H:%M"
+      short_datetime: "%-d.%m.%Y %H.%M"
+      full_datetime: '%d.%m.%Y %H:%M:%S'
+      full_timedate: '%H:%M:%S %d.%m.%Y'
+      short_human: '%-d %B'
+      human: '%e %B %Y'
+      input: '%e/%m/%Y'
+  activerecord:
+    errors:
+      models:
+        check:
+          attributes:
+            photo_hash:
+              taken: "чек с таким фото уже зарегистирирован"
+      messages:
+        record_invalid: Испорченная запись
+        invalid_range: Дата окончания периода должна быть больше даты начала
+        intersection: Период пересекается с другим (id = %{id})
+        extension_white_list_error: 'Вы загрузили файл с неподходящим расширением, выберите другой файл и попробуйте еще раз'
+    attributes:
+      payout:
+        state:
+          unpaid: Не выплачено
+          paid: Выплачено
+      promo_action:
+        state:
+          preparing: Подготовка
+          works: Прием чеков
+          determination_of_winners: Определение победителей
+          finished: Завершена
+          turned_off: Архив
+      prise:
+        state:
+          idle:      Не разыгран
+          assigned:  Есть претендент
+          gone:      Отправлен победителю
+    users:
+      roles:
+        admin: Администратор
+        manager: Оператор акции
+
+  form_objects:
+    errors:
+      messages:
+        invalid_range: Дата окончания периода должна быть больше даты начала
+        intersection: Период пересекается с другим

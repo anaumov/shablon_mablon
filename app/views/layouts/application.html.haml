@@ -1,0 +1,21 @@
+!!!
+%html{lang: "en"}
+  %head
+    %meta{:charset => "utf-8"}
+    %meta{content: "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{content: "width=device-width, initial-scale=1", name:  "viewport"}
+    %meta{content: "", name: "description"}
+    %meta{content: "", name: "author"}
+    %title= content_for?(:title) ? yield(:title) : Settings.app.title
+    = stylesheet_link_tag :application, :media => "all"
+    = favicon_link_tag
+    = csrf_meta_tags
+    = action_cable_meta_tag
+  %body{class: "#{controller_name} #{action_name}"}
+    = render 'layouts/messages'
+    = yield
+    = javascript_include_tag :application
+    = evil_icons_sprite
+    - if Rails.env.production?
+      = render('layouts/metrika')
+      = render 'layouts/chatra'

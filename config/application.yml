@@ -1,0 +1,72 @@
+defaults: &defaults
+  pagination:
+    per_page: 25
+
+  app:
+    title: ШаблонМаблон
+    host: https://getlucky.ru
+    asset_host: https://getlucky.ru
+    default_url_options: &default_url_options
+      host: https://getlucky.ru
+
+  mailer_defaults: &mailer_defaults
+    from: 'noreply@HOSTNAME'
+    host: HOSTNAME
+
+  api:
+    auth_token: 'rJu3twmZZRbLuBgq$2a$1cvpJdYOFk30$D8t'
+
+  mailer:
+    domain: 'actie.ru'
+    default_from: 'help@actie.ru'
+    default_to: 'help@actie.ru'
+
+  sidekiq:
+    redis:
+      url: redis://localhost:6379
+
+  errbit:
+    host: ''
+    key: ''
+
+development:
+  <<: *defaults
+  app:
+    title: ШаблонМаблон
+    host: http://localhost:3000
+    asset_host: http://localhost:3000
+    default_url_options: &default_url_options
+      host: http://localhost
+      port: 3000
+
+
+test:
+  <<: *defaults
+  capybara:
+    port: 57500
+
+  mailer_defaults:
+    <<: *mailer_defaults
+
+production:
+  <<: *defaults
+  mailer_defaults:
+    <<: *mailer_defaults
+
+staging:
+  <<: *defaults
+  app:
+    title: ШаблонМаблон STAGE
+    asset_host: https://stage.actie.ru
+    default_url_options: &default_url_options
+      host: HOSTNAME
+      port: 80
+
+  mailer_defaults:
+    <<: *mailer_defaults
+
+backup:
+  dropbox:
+    api_key: 55gmjql036ufwc0
+    api_secret: hpkgae796s1tb14
+    keep: 50

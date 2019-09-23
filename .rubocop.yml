@@ -1,0 +1,32 @@
+inherit_from: .rubocop_todo.yml
+
+# This is the configuration used to check the rubocop source code.
+
+AllCops:
+  Exclude:
+    - Gemfile
+    - Guardfile
+    - bin/*
+    - db/schema.rb
+    - 'vendor/**/*'
+    - 'spec/fixtures/**/*'
+    - lib/tasks/*.rake
+    - lib/tasks/**/*.rake
+    - 'tmp/**/*'
+    - db/migrate/*.rb
+    - db/*.rb
+    - lib/smsc_api.rb
+    - spec/factories/*.rb
+  TargetRubyVersion: 2.6
+
+Style/FrozenStringLiteralComment:
+  EnforcedStyle: when_needed
+
+Style/AsciiComments:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 200
+
+Documentation:
+  Enabled: false

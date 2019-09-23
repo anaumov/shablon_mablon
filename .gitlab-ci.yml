@@ -1,0 +1,56 @@
+image: "ruby:2.6"
+stages:
+  - test
+# - deploy
+
+services:
+  - redis:latest
+  - postgres:latest
+
+variables:
+  POSTGRES_DB: ttt_test
+  BUNDLE_PATH: vendor/bundle
+  DISABLE_SPRING: 1
+
+.default-cache: &default-cache
+  cache:
+    untracked: true
+    key: app-actie-0.1
+    paths:
+      # - node_modules/
+      - vendor/
+      - public/
+
+test:
+  <<: *default-cache
+  stage: test
+  variables:
+    RAILS_ENV: test
+    REDIS_URL: redis://redis:6379
+    DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/$POSTGRES_DB"
+    FNS_API_MASTER_KEY: 'test'
+  before_script:
+    - apt-get update -qq
+    - apt-get install -y -qq libpq-dev cmake libzbar0 nodejs
+    - gem install bundler --no-document
+    - bundle install --jobs $(nproc) "${FLAGS[@]}"
+    # В тестовом окружении снапшот базы берется из shema.rb, миграции не нужны
+    - bundle exec rake db:test:prepare
+  script:
+  # Пока что это не нужно, т.к. там только ключи для AWS который не используется
+  # небольшая, но оптимизация
+  # - cp .env-sample .env
+  - bundle exec rspec
+  - bundle exec brakeman
+
+# staging:
+#   environment: staging
+#   stage: deploy
+#   script:
+#     - which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
+#     - eval $(ssh-agent -s)
+#     # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+#     - ssh-add <(echo -e "$SSH_PRIVATE_KEY")
+#     - bundle exec cap staging deploy
+#   only:
+#     - master

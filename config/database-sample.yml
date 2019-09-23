@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: <%= ENV.fetch('PGUSER') %>
+  password: <%= ENV.fetch('PGPASSWORD', '') %>
+
+development:
+  <<: *default
+  database: ttt_development
+
+test:
+  <<: *default
+  database: ttt_test
+
+production:
+  <<: *default
+  database: ttt_production

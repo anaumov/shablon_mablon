@@ -1,0 +1,15 @@
+defaults: &defaults
+  anketa_key: '3a6fa6c025d72a4b788026063b5c9047'
+  tax_service: '21af9aa746154610f7f0bcd9aef82dde'
+
+development:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
